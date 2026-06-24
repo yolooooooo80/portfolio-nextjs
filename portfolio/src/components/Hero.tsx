@@ -299,8 +299,8 @@ export default function Hero() {
         >
           {[
             { num: "2+", label: "Tahun Pengalaman" },
-            { num: "15+", label: "Proyek Selesai" },
-            { num: "28", label: "Repositori GitHub" },
+            { num: "4", label: "Proyek Selesai" },
+            { num: "20", label: "Repositori GitHub" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="font-black" style={{ fontSize: "2rem", color: "var(--gold)", lineHeight: 1 }}>
