@@ -35,18 +35,17 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24"
+        className="fixed top-0 left-0 right-0 z-50"
         style={{
-          padding: scrolled ? "1rem 0" : "1.5rem 0",
-          paddingLeft: "clamp(2rem, 5vw, 6rem)",
-          paddingRight: "clamp(2rem, 5vw, 6rem)",
+          paddingTop: scrolled ? "1rem" : "1.5rem",
+          paddingBottom: scrolled ? "1rem" : "1.5rem",
           background: scrolled ? "rgba(10,10,10,0.94)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           borderBottom: scrolled ? "1px solid rgba(201,168,76,0.07)" : "none",
           transition: "all 0.4s ease",
         }}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 flex items-center justify-between">
           {/* Logo */}
           <div
             onClick={() => handleNav("#home")}

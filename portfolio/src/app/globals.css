@@ -13,9 +13,63 @@
   --text-muted: #555555;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--black);
+  color: var(--white);
+  align-items: center; /* Memastikan semua container utama berada di tengah */
+}
+
+/* 2. Bungkus utama konten Anda (Sesuaikan dengan tag wrapper Anda, misal <main> atau class utama) */
+main, .main-container {
+  width: 100%;
+  max-width: 1200px;    /* Batas lebar maksimal di layar laptop/desktop */
+  margin-left: 120px;
+  margin-right: 120px;
+  padding-left: 20px;   /* Jarak aman di kanan-kiri saat dibuka di HP */
+  padding-right: 20px;
+}
+
+/* 3. Otomatisasi Grid Kartu Statistik (28 repo, 1 follower, dll) agar Responsif */
+.stats-grid-container {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+  /* DEFAULT HP: Otomatis membagi jadi 2 kolom jika ruangnya sempit */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+}
+
+/* DESKTOP SCREEN: Ketika layar lebih lebar dari 768px, otomatis sejajar rapi */
+@media (min-width: 768px) {
+  .stats-grid-container {
+    grid-template-columns: repeat(4, 1fr); /* Pas 4 kolom berjejer */
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* 4. Mengatasi Grafik Kontribusi GitHub yang Terlalu Lebar di HP */
+.github-chart-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Di HP bisa di-swipe kanan-kiri, tidak merusak layout */
+  display: flex;
+  justify-content: flex-start; /* Di HP mulai dari kiri */
+  padding-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+  .github-chart-wrapper {
+    justify-content: center; /* Di desktop otomatis kotak-kotaknya ke tengah */
+  }
+}
+
 * {
-  margin: 2px;
-  padding: 0; 
+  margin: 0px;
+  padding: 1px;
   box-sizing: border-box;
 }
 

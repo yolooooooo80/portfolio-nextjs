@@ -80,10 +80,7 @@ export default function About() {
             </p>
 
             <div className="about-para flex justify-center lg:justify-start">
-              <button className="btn-primary">
-                <Download size={14} />
-                Unduh CV
-              </button>
+              
             </div>
           </div>
 

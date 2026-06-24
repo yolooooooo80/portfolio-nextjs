@@ -7,6 +7,9 @@ export default function Cursor() {
   const followerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Pastikan hanya jalan di client
+    if (typeof window === "undefined") return;
+
     const cursor = cursorRef.current;
     const follower = followerRef.current;
     if (!cursor || !follower) return;
@@ -33,13 +36,17 @@ export default function Cursor() {
     window.addEventListener("mousemove", moveCursor);
 
     const interactables = document.querySelectorAll("a, button, [data-hover]");
-    interactables.forEach(el => {
+    interactables.forEach((el) => {
       el.addEventListener("mouseenter", onEnter);
       el.addEventListener("mouseleave", onLeave);
     });
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+      interactables.forEach((el) => {
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+      });
     };
   }, []);
 
