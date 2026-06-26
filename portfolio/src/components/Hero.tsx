@@ -64,7 +64,7 @@ const techs = [
 
 const socials = [
   { icon: GithubIcon, label: "GitHub", href: "https://github.com/yolooooooo80" },
-  { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com/" },
+  { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com/lex.williamm"},
   { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com/in/" },
 ];
 

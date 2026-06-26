@@ -144,7 +144,7 @@ export default function TechStack() {
               }}
             >
               <div
-                style={{ width: "40px", height: "40px", filter: "grayscale(100%) brightness(1.2)" }}
+                style={{ width: "40px", height: "40px", }}
                 dangerouslySetInnerHTML={{ __html: tech.svg }}
               />
               <span style={{

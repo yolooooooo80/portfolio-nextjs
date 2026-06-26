@@ -26,10 +26,10 @@ body {
 /* 2. Bungkus utama konten Anda (Sesuaikan dengan tag wrapper Anda, misal <main> atau class utama) */
 main, .main-container {
   width: 100%;
-  max-width: 1200px;    /* Batas lebar maksimal di layar laptop/desktop */
-  margin-left: 120px;
-  margin-right: 120px;
-  padding-left: 20px;   /* Jarak aman di kanan-kiri saat dibuka di HP */
+  max-width: 1400px;    /* Batas lebar maksimal di layar laptop/desktop */
+  margin-left: 200px;
+  margin-right: 190px;
+  padding-left: 100px;   /* Jarak aman di kanan-kiri saat dibuka di HP */
   padding-right: 20px;
 }
 
