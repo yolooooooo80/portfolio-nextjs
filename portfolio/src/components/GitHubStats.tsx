@@ -10,13 +10,13 @@ gsap.registerPlugin(ScrollTrigger);
 const githubData = {
   username: "yolooooooo80",
   name: "alex",
-  repos: 28,
+  repos: 19,
   followers: 1,
   avatar: "https://avatars.githubusercontent.com/u/187585690?v=4",
   pinnedRepos: [
-    { name: "modul-9", lang: "Java", color: "#b07219", stars: 0, forks: 0 },
-    { name: "modul-subprogram", lang: "Java", color: "#b07219", stars: 0, forks: 0 },
-    { name: "UTS-PAD", lang: "Python", color: "#3572A5", stars: 0, forks: 0 },
+    { name: "perpustakaan-website", lang: "Blade", color: "#f7523f", stars: 0, forks: 0, url: "https://github.com/yolooooooo80/perpustakaan-website" },
+    { name: "portfolio-nextjs", lang: "TypeScript", color: "#3178c6", stars: 0, forks: 0, url: "https://github.com/yolooooooo80/portfolio-nextjs" },
+    { name: "Nuelll20/SPMB_Project", lang: "Blade", color: "#f7523f", stars: 1, forks: 0, url: "https://github.com/Nuelll20/SPMB_Project" },
   ],
 };
 
@@ -106,25 +106,31 @@ export default function GitHubStats() {
         {/* Stats cards */}
         <div className="gh-grid grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {[
-            { icon: BookOpen, label: "Repositori", value: githubData.repos },
-            { icon: Users, label: "Followers", value: githubData.followers },
+            { icon: BookOpen, label: "Repositori", value: githubData.repos, url: `https://github.com/${githubData.username}?tab=repositories` },
+            { icon: Users, label: "Followers", value: githubData.followers, url: `https://github.com/${githubData.username}?tab=followers` },
             { icon: Star, label: "Stars Diterima", value: "0" },
             { icon: GitFork, label: "Kontribusi", value: "150+" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="gh-card experience-card text-center"
-              style={{ padding: "2rem 1rem" }}
-            >
-              <stat.icon size={22} style={{ color: "var(--gold)", margin: "0 auto 0.75rem" }} />
-              <div className="font-black" style={{ fontSize: "2rem", color: "var(--white)", lineHeight: 1, marginBottom: "0.4rem" }}>
-                {stat.value}
-              </div>
-              <div style={{ fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--text-muted)" }}>
-                {stat.label}
-              </div>
-            </div>
-          ))}
+          ].map((stat) => {
+            const CardWrapper = stat.url ? "a" : "div";
+            return (
+              <CardWrapper
+                key={stat.label}
+                href={stat.url}
+                target={stat.url ? "_blank" : undefined}
+                rel={stat.url ? "noopener noreferrer" : undefined}
+                className="gh-card experience-card text-center block"
+                style={{ padding: "2rem 1rem", textDecoration: "none", cursor: stat.url ? "none" : "default" }}
+              >
+                <stat.icon size={22} style={{ color: "var(--gold)", margin: "0 auto 0.75rem" }} />
+                <div className="font-black" style={{ fontSize: "2rem", color: "var(--white)", lineHeight: 1, marginBottom: "0.4rem" }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+                  {stat.label}
+                </div>
+              </CardWrapper>
+            );
+          })}
         </div>
 
         {/* Contribution graph */}
@@ -182,10 +188,10 @@ export default function GitHubStats() {
           {githubData.pinnedRepos.map((repo) => (
             <a
               key={repo.name}
-              href={`https://github.com/${githubData.username}/${repo.name}`}
+              href={repo.url || `https://github.com/${githubData.username}/${repo.name}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="gh-card experience-card"
+              className="gh-card experience-card block"
               style={{ textDecoration: "none", cursor: "none" }}
             >
               <div className="flex items-start justify-between mb-3">
