@@ -22,9 +22,17 @@ const githubData = {
 
 const contribWeeks = Array.from({ length: 52 }, (_, wi) =>
   Array.from({ length: 7 }, (_, di) => {
-    const rand = Math.random();
-    const active = rand > 0.55;
-    const intensity = active ? Math.floor(Math.random() * 4) + 1 : 0;
+    // Use deterministic pseudo-random to prevent hydration mismatch between server and client
+    const seed = wi * 7 + di;
+    const rand1 = Math.sin(seed * 12.9898) * 43758.5453;
+    const pseudoRandom1 = rand1 - Math.floor(rand1);
+    
+    const active = pseudoRandom1 > 0.55;
+    
+    const rand2 = Math.cos(seed * 78.233) * 43758.5453;
+    const pseudoRandom2 = rand2 - Math.floor(rand2);
+    
+    const intensity = active ? Math.floor(pseudoRandom2 * 4) + 1 : 0;
     return intensity;
   })
 );
