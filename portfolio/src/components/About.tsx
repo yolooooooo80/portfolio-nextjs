@@ -59,7 +59,7 @@ export default function About() {
           {/* Left */}
           <div className="about-text">
             <h2
-              className="about-heading font-black leading-none mb-8 text-center lg:text-left"
+              className="about-heading font-black leading-none mb-8 text-center"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
             >
               Developer yang<br />
@@ -67,19 +67,19 @@ export default function About() {
               <span className="gold-gradient">Sistem.</span>
             </h2>
 
-            <p className="about-para mb-5" style={{ color: "var(--gray-light)", lineHeight: "1.8", fontSize: "0.95rem" }}>
+            <p className="about-para mb-5 text-center" style={{ color: "var(--gray-light)", lineHeight: "1.8", fontSize: "0.95rem" }}>
               Saya adalah seorang frontend engineer dengan passion mendalam dalam membangun
               antarmuka yang seindah performa-nya. Setiap proyek yang saya kerjakan dimulai
               dengan memahami pengguna, lalu mundur ke solusi teknis yang paling elegan.
             </p>
 
-            <p className="about-para mb-10" style={{ color: "var(--gray-light)", lineHeight: "1.8", fontSize: "0.95rem" }}>
+            <p className="about-para mb-10 text-center" style={{ color: "var(--gray-light)", lineHeight: "1.8", fontSize: "0.95rem" }}>
               Saat ini sedang menempuh studi Ilmu Komputer sambil membangun aplikasi
               tingkat produksi. Pekerjaan saya mencakup landing page, dashboard SaaS,
               dan pengalaman interaktif — selalu mendorong batas kemampuan browser.
             </p>
 
-            <div className="about-para flex justify-center lg:justify-start">
+            <div className="about-para flex justify-center">
               
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function About() {
           {/* Right: Socials */}
           <div>
             <div
-              className="mb-6 section-label text-center lg:text-left"
+              className="mb-6 section-label text-center"
               style={{ color: "var(--text-muted)" }}
             >
               Temukan Saya Di
@@ -128,7 +128,7 @@ export default function About() {
 
             {/* Small info box */}
             <div
-              className="mt-8 p-5"
+              className="mt-8 p-5 text-center"
               style={{ border: "1px solid rgba(201,168,76,0.15)", background: "rgba(201,168,76,0.04)" }}
             >
               <div style={{ fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "0.5rem" }}>

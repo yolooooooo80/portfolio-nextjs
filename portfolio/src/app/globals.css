@@ -14,23 +14,18 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
   margin: 0;
   background-color: var(--black);
   color: var(--white);
-  align-items: center; /* Memastikan semua container utama berada di tengah */
 }
 
 /* 2. Bungkus utama konten Anda (Sesuaikan dengan tag wrapper Anda, misal <main> atau class utama) */
 main, .main-container {
   width: 100%;
-  max-width: 1400px;    /* Batas lebar maksimal di layar laptop/desktop */
-  margin-left: 200px;
-  margin-right: 190px;
-  padding-left: 100px;   /* Jarak aman di kanan-kiri saat dibuka di HP */
-  padding-right: 20px;
+  max-width: 1200px; /* Reduced from 1400px so it feels more centered on large screens */
+  margin: 0 auto;
+  padding: 0;
 }
 
 /* 3. Otomatisasi Grid Kartu Statistik (28 repo, 1 follower, dll) agar Responsif */
@@ -41,6 +36,31 @@ main, .main-container {
   justify-content: center;
   /* DEFAULT HP: Otomatis membagi jadi 2 kolom jika ruangnya sempit */
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+}
+
+/* Flex grid untuk Tech Stack agar baris terakhir rata (justified) dan ringkas */
+.tech-flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.tech-flex-card {
+  /* Mobile: 3 cards per row */
+  flex: 0 0 calc(33.333% - 0.666rem);
+}
+@media (min-width: 768px) {
+  .tech-flex-card { 
+    /* Tablet: 5 cards per row */
+    flex: 0 0 calc(20% - 0.8rem);
+  }
+}
+@media (min-width: 1024px) {
+  .tech-flex-card { 
+    /* Desktop: 10 cards per row. Dengan 19 tech stack, ini akan 
+       selalu menghasilkan HANYA 2 baris (10 di atas, 9 di bawah rata tengah) */
+    flex: 0 0 calc(10% - 0.9rem); 
+  }
 }
 
 /* DESKTOP SCREEN: Ketika layar lebih lebar dari 768px, otomatis sejajar rapi */
@@ -68,8 +88,8 @@ main, .main-container {
 }
 
 * {
-  margin: 0px;
-  padding: 1px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -368,4 +388,29 @@ body {
 @media (max-width: 768px) {
   body { cursor: auto; }
   .cursor, .cursor-follower { display: none; }
+
+  /* Mobile-friendly buttons */
+  .btn-primary, .btn-outline {
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Fix experience cards on mobile */
+  .experience-card {
+    padding: 1.25rem;
+  }
+
+  /* Sections padding adjustment */
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-primary, .btn-outline {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.7rem;
+  }
 }

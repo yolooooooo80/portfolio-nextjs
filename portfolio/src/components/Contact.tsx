@@ -127,7 +127,7 @@ export default function Contact() {
 
           {/* Form */}
           <form className="contact-form flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label style={{ fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--text-muted)", textTransform: "uppercase", display: "block", marginBottom: "0.5rem" }}>Nama</label>
                 <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}

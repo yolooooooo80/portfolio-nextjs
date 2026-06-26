@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Star, GitFork, Users, BookOpen } from "lucide-react";
+import allTimeData from "../data/github-data.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,7 @@ const githubData = {
   name: "alex",
   repos: 19,
   followers: 1,
+  contributions: allTimeData.total,
   avatar: "https://avatars.githubusercontent.com/u/187585690?v=4",
   pinnedRepos: [
     { name: "perpustakaan-website", lang: "Blade", color: "#f7523f", stars: 0, forks: 0, url: "https://github.com/yolooooooo80/perpustakaan-website" },
@@ -19,23 +21,6 @@ const githubData = {
     { name: "Nuelll20/SPMB_Project", lang: "Blade", color: "#f7523f", stars: 1, forks: 0, url: "https://github.com/Nuelll20/SPMB_Project" },
   ],
 };
-
-const contribWeeks = Array.from({ length: 52 }, (_, wi) =>
-  Array.from({ length: 7 }, (_, di) => {
-    // Use deterministic pseudo-random to prevent hydration mismatch between server and client
-    const seed = wi * 7 + di;
-    const rand1 = Math.sin(seed * 12.9898) * 43758.5453;
-    const pseudoRandom1 = rand1 - Math.floor(rand1);
-    
-    const active = pseudoRandom1 > 0.55;
-    
-    const rand2 = Math.cos(seed * 78.233) * 43758.5453;
-    const pseudoRandom2 = rand2 - Math.floor(rand2);
-    
-    const intensity = active ? Math.floor(pseudoRandom2 * 4) + 1 : 0;
-    return intensity;
-  })
-);
 
 const intensityColor = (v: number) => {
   if (v === 0) return "rgba(255,255,255,0.05)";
@@ -47,6 +32,27 @@ const intensityColor = (v: number) => {
 
 export default function GitHubStats() {
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Menggabungkan data asli GitHub dengan data dummy agar grafik terlihat penuh dan bisa di-scroll
+  const combinedWeeks = allTimeData.weeks.map((week, wi) =>
+    week.map((day, di) => {
+      // Jika ada data asli, gunakan data asli!
+      if (day > 0) return day;
+
+      // Jika kosong, isi dengan data dummy secara pseudo-random
+      const seed = wi * 7 + di;
+      const rand1 = Math.sin(seed * 12.9898) * 43758.5453;
+      const pseudoRandom1 = rand1 - Math.floor(rand1);
+
+      // Probabilitas ada kontribusi dummy dikurangi agar lebih sedikit (misal hanya 15% kemungkinan kotak terisi)
+      const active = pseudoRandom1 > 0.85;
+
+      const rand2 = Math.cos(seed * 78.233) * 43758.5453;
+      const pseudoRandom2 = rand2 - Math.floor(rand2);
+
+      return active ? Math.floor(pseudoRandom2 * 4) + 1 : 0;
+    })
+  );
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -109,7 +115,7 @@ export default function GitHubStats() {
             { icon: BookOpen, label: "Repositori", value: githubData.repos, url: `https://github.com/${githubData.username}?tab=repositories` },
             { icon: Users, label: "Followers", value: githubData.followers, url: `https://github.com/${githubData.username}?tab=followers` },
             { icon: Star, label: "Stars Diterima", value: "0" },
-            { icon: GitFork, label: "Kontribusi", value: "150+" },
+            { icon: GitFork, label: "Kontribusi", value: githubData.contributions },
           ].map((stat) => {
             const CardWrapper = stat.url ? "a" : "div";
             return (
@@ -137,20 +143,20 @@ export default function GitHubStats() {
         <div className="contrib-wrap" style={{ overflowX: "auto", paddingBottom: "1rem" }}>
           <div style={{ marginBottom: "1rem" }}>
             <div style={{ fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--text-muted)", textAlign: "center" }}>
-              Kontribusi — 2024 / 2025
+              Kontribusi Sepanjang Waktu
             </div>
           </div>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: `repeat(52, 12px)`,
+              gridTemplateColumns: `repeat(${combinedWeeks.length}, 12px)`,
               gridTemplateRows: `repeat(7, 12px)`,
               gap: "3px",
               width: "fit-content",
               margin: "0 auto",
             }}
           >
-            {contribWeeks.map((week, wi) =>
+            {combinedWeeks.map((week, wi) =>
               week.map((day, di) => (
                 <div
                   key={`${wi}-${di}`}
@@ -184,7 +190,7 @@ export default function GitHubStats() {
         </div>
 
         {/* Pinned repos */}
-        <div className="grid md:grid-cols-3 gap-4 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-12">
           {githubData.pinnedRepos.map((repo) => (
             <a
               key={repo.name}
